@@ -1,2 +1,2 @@
 # Noise
-Testing some octave uniform noise with different blend modes.
+Testing octave uniform noise with different blend modes.
