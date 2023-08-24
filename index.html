@@ -1,0 +1,50 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<script src="gpu-browser.min.js"></script>
+		<script type="module" src="Hash.js"></script>
+		<script type="module" src="XOR128.js"></script>
+		<script type="module" src="Linear.js"></script>
+		<script type="module" src="Bilinear.js"></script>
+		<script type="module" src="Noise2D.js"></script>
+	</head>
+	<body>
+		<canvas width="700" height="700"></canvas>
+		<script type="module">
+
+			import Noise2D from './Noise2D.js';
+
+			const noise = new Noise2D({
+
+				seed: 0,
+				octaves: 5,
+				resolution: 350,
+				scale: 8
+
+			});
+
+			const canvas = document.querySelector('canvas');
+			const context = canvas.getContext('2d');
+
+			function draw( x, y ) {
+
+				for ( let i = 0; i < canvas.width; i ++ ) {
+				for ( let j = 0; j < canvas.height; j ++ ) {
+
+					const r = 255*noise.get( i-x, j-x );
+
+					const value = Math.min( 255, r );
+
+					context.fillStyle = `rgba(${value},${value},${value},1)`;
+					context.fillRect( i, j, 1, 1 );
+
+				}
+				}
+
+			}
+
+			draw(-170,20);
+		
+		</script>
+	</body>
+</html>
